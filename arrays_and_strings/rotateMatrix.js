@@ -15,7 +15,9 @@ function rotateMatrix(m){
 }
 
 // in-place
-function rotateMatrix2(m){
+// space O()
+// time O()
+function rotateMatrix2(m){  // WIP
   var len = m.length;
   var layers = Math.floor(len/2);
   for (let i=0; i<len; i++) {
