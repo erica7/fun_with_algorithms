@@ -4,7 +4,7 @@
 // Singly Linked List data stucture
 function SinglyLinkedList (val = null) {
   if (val) {
-    this.head = new this.ListNode (val)
+    this.head = new this.ListNode (val);
   } else {
     this.head = null;
   }
@@ -52,6 +52,14 @@ SinglyLinkedList.prototype.generateList = function(arr){
     sll.addNode(sll, arr[i]);
   }
   return sll;
+}
+
+SinglyLinkedList.prototype.printAll = function(){
+  var runner = this.head;
+  while (runner) {
+    console.log(runner.val);
+    runner = runner.next;
+  }
 }
 
 module.exports = SinglyLinkedList;
