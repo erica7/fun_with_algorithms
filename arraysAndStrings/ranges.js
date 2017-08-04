@@ -21,7 +21,7 @@ function ranges(arr) {
       count = 0;
     }
   }
-  // account for the last element using the existing count
+  // account for the last element; use the existing count
   if (count >= 2) {
     newArr.push(arr[i-count].toString() + "-" + arr[i].toString());
   } else if (count == 1) {
@@ -30,6 +30,7 @@ function ranges(arr) {
   } else {
     newArr.push(arr[i]);
   }
+  // join the new array into a string with commas between each element
   return newArr.join(",");
 }
 
