@@ -21,7 +21,16 @@ namespace misc
             Console.WriteLine(TriangleType(2, 4, 6));
             Console.WriteLine(TriangleType(8, 5, 7));
             Console.WriteLine(TriangleType(3, 4, 5));
-            Console.WriteLine(TriangleType(7, 12, 8));        }
+            Console.WriteLine(TriangleType(7, 12, 8));
+
+            // // TORTOISE RACE
+            // int[] testRes = TortoiseRace(720, 850, 70);  // returns [0, 32, 18]
+            // int[] testRes1 = TortoiseRace(80, 91, 37);  // returns [3, 21, 49]
+            // int[] testRes2 = TortoiseRace(80, 100, 40);  // returns [2, 0, 0]
+            // foreach(var item in testRes) { Console.Write("{0} ", item); }
+            // foreach(var item in testRes1) { Console.Write("{0} ", item); }
+            // foreach(var item in testRes2) { Console.Write("{0} ", item); }
+        }
 
         static int? IsPrime(int n){
             for (int i = 2; i <= Math.Floor((double) n/2); i++)
@@ -102,6 +111,27 @@ namespace misc
             // }
 
             // return 0;
+        }
+
+        public static int[] TortoiseRace(int v1, int v2, int g) 
+        {
+            if (v1 >= v2)
+            {
+                int[] ret = {-1, -1, -1};
+                return ret;
+            }
+            
+            double time = (double) g / (v2 - v1);  // ft / ft/h  => h
+
+            int h = (int) time;
+
+            double min = (time - h) * 60;
+            int m = (int) min;
+            
+            int s = (int) (min % 1 * 60);
+            
+            int[] hms = {h, m, s};
+            return hms;
         }
     }
 }
