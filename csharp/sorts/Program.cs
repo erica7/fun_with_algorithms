@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-// to do:
-//   merge sort
-//   quick sort
-
 namespace csharpSorts
 {
     class Program
@@ -20,12 +16,20 @@ namespace csharpSorts
                 testCaseList.Add(testCase[i]);
             }
 
-            // BUBBLE SORT
-            int[] bubbleSortReturn = BubbleSort(testCase);
-            foreach (var item in bubbleSortReturn)
+            // // BUBBLE SORT
+            // int[] bubbleSortReturn = BubbleSort(testCase);
+            // foreach (var item in bubbleSortReturn)
+            // {
+            //     Console.WriteLine(item);
+            // }
+
+            // SELECTION SORT
+            int[] selectionSortReturn = SelectionSort(testCase);
+            foreach (var item in selectionSortReturn)
             {
-                Console.WriteLine(item);
+                Console.Write("{0}, ", item);
             }
+            Console.WriteLine();
         }
 
         static int[] BubbleSort(int[] arr)
@@ -52,6 +56,32 @@ namespace csharpSorts
                 else 
                 {
                     sorted = true;
+                }
+            }
+            return arr;
+        }
+
+        static int[] SelectionSort(int[] arr)
+        {
+            int len = arr.Length;
+            for (int n=0; n<len; n++)
+            {
+                int min = arr[n];
+                int minInd = n;
+                // find the min each time and swap it to 'beginning' (which keeps moving over; index n)
+                for (int i=n; i<len; i++)
+                {
+                    if (arr[i] < min) 
+                    {
+                        min = arr[i];
+                        minInd = i;
+                    }
+                }
+                if (n != minInd)
+                {
+                    int temp = arr[n];
+                    arr[n] = arr[minInd];
+                    arr[minInd] = temp;
                 }
             }
             return arr;
