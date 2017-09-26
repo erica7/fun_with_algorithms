@@ -23,9 +23,17 @@ namespace csharpSorts
             //     Console.WriteLine(item);
             // }
 
-            // SELECTION SORT
-            int[] selectionSortReturn = SelectionSort(testCase);
-            foreach (var item in selectionSortReturn)
+            // // SELECTION SORT
+            // int[] selectionSortReturn = SelectionSort(testCase);
+            // foreach (var item in selectionSortReturn)
+            // {
+            //     Console.Write("{0}, ", item);
+            // }
+            // Console.WriteLine();
+
+            // INSERTION SORT
+            int[] insertionSortReturn = InsertionSort(testCase);
+            foreach (var item in insertionSortReturn)
             {
                 Console.Write("{0}, ", item);
             }
@@ -82,6 +90,24 @@ namespace csharpSorts
                     int temp = arr[n];
                     arr[n] = arr[minInd];
                     arr[minInd] = temp;
+                }
+            }
+            return arr;
+        }
+        
+        static int[] InsertionSort(int[] arr)  
+        {
+            int len = arr.Length;
+            for (int n = 0; n < len-1; n++)
+            {
+                for (int i = n+1; i > 0; i--)
+                {
+                    if (arr[i] < arr[i-1])
+                    {
+                        int temp = arr[i];
+                        arr[i] = arr[i-1];
+                        arr[i-1] = temp;
+                    }
                 }
             }
             return arr;
