@@ -17,11 +17,11 @@ namespace misc
             // List<int> testCaseRet = IsPrimeCount(10);
             // testCaseRet.ForEach(item => Console.Write("{0}  ", item));
 
-            // TRIANGLE TYPE
-            Console.WriteLine(TriangleType(2, 4, 6));
-            Console.WriteLine(TriangleType(8, 5, 7));
-            Console.WriteLine(TriangleType(3, 4, 5));
-            Console.WriteLine(TriangleType(7, 12, 8));
+            // // TRIANGLE TYPE
+            // Console.WriteLine(TriangleType(2, 4, 6));
+            // Console.WriteLine(TriangleType(8, 5, 7));
+            // Console.WriteLine(TriangleType(3, 4, 5));
+            // Console.WriteLine(TriangleType(7, 12, 8));
 
             // // TORTOISE RACE
             // int[] testRes = TortoiseRace(720, 850, 70);  // returns [0, 32, 18]
@@ -30,6 +30,14 @@ namespace misc
             // foreach(var item in testRes) { Console.Write("{0} ", item); }
             // foreach(var item in testRes1) { Console.Write("{0} ", item); }
             // foreach(var item in testRes2) { Console.Write("{0} ", item); }
+
+            // SUM OF RANGE 
+            Console.WriteLine(SumOfRange(1, 0)); // == 1   // 1 + 0 = 1
+            Console.WriteLine(SumOfRange(1, 2)); // == 3   // 1 + 2 = 3
+            Console.WriteLine(SumOfRange(0, 1)); // == 1   // 0 + 1 = 1
+            Console.WriteLine(SumOfRange(1, 1)); // == 1   // 1 Since both are same
+            Console.WriteLine(SumOfRange(-1, 0)); // == -1 // -1 + 0 = -1
+            Console.WriteLine(SumOfRange(-1, 2)); // == 2  // -1 + 0 + 1 + 2 = 2
         }
 
         static int? IsPrime(int n){
@@ -72,7 +80,8 @@ namespace misc
             return arr;
         }
 
-        static int TriangleType(double a, double b, double c) {
+        static int TriangleType(double a, double b, double c) 
+        {
             /* Should return ᐃ type:
                 0 : if ᐃ cannot be made with given sides
                 1 : acute ᐃ
@@ -132,6 +141,33 @@ namespace misc
             
             int[] hms = {h, m, s};
             return hms;
+        }
+
+        public static int SumOfRange(int a, int b) 
+        {
+            // Given two integers (not ordered; can be positive and negative) find the sum of all numbers between, inclusive. If both numbers are equal return a or b.
+            if (a == b)
+            {
+                return a;
+            }
+            int sum = 0;
+            int min;
+            int max;
+            if (a < b)
+            {
+                min = a;
+                max = b;
+            } 
+            else 
+            {
+                min = b;
+                max = a;
+            }
+            for (int n = min; n <= max; n++)
+            {
+                sum += n;
+            }
+            return sum;
         }
     }
 }
