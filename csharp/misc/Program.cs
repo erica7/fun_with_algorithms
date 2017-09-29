@@ -31,13 +31,17 @@ namespace misc
             // foreach(var item in testRes1) { Console.Write("{0} ", item); }
             // foreach(var item in testRes2) { Console.Write("{0} ", item); }
 
-            // SUM OF RANGE 
-            Console.WriteLine(SumOfRange(1, 0)); // == 1   // 1 + 0 = 1
-            Console.WriteLine(SumOfRange(1, 2)); // == 3   // 1 + 2 = 3
-            Console.WriteLine(SumOfRange(0, 1)); // == 1   // 0 + 1 = 1
-            Console.WriteLine(SumOfRange(1, 1)); // == 1   // 1 Since both are same
-            Console.WriteLine(SumOfRange(-1, 0)); // == -1 // -1 + 0 = -1
-            Console.WriteLine(SumOfRange(-1, 2)); // == 2  // -1 + 0 + 1 + 2 = 2
+            // // SUM OF RANGE 
+            // Console.WriteLine(SumOfRange(1, 0)); // == 1   // 1 + 0 = 1
+            // Console.WriteLine(SumOfRange(1, 2)); // == 3   // 1 + 2 = 3
+            // Console.WriteLine(SumOfRange(0, 1)); // == 1   // 0 + 1 = 1
+            // Console.WriteLine(SumOfRange(1, 1)); // == 1   // 1 Since both are same
+            // Console.WriteLine(SumOfRange(-1, 0)); // == -1 // -1 + 0 = -1
+            // Console.WriteLine(SumOfRange(-1, 2)); // == 2  // -1 + 0 + 1 + 2 = 2
+
+            // CALCULATE YEARS 
+            Console.WriteLine(CalculateYears(1000,0.05,0.18,1000));  // => 0
+            Console.WriteLine(CalculateYears(1000,0.01625,0.18,1200));  // => 14
         }
 
         static int? IsPrime(int n){
@@ -168,6 +172,22 @@ namespace misc
                 sum += n;
             }
             return sum;
+        }
+
+        public static int CalculateYears(double principal, double interest,  double tax, double desiredPrincipal)  
+        {
+            // For sum of money, principal, determine how many years as a whole number this sum has to be kept in the bank in order for this sum of money to amount to desiredPrincipal.
+            // The sum is kept for years in the bank where interest is paid yearly, and the new sum is re-invested yearly after paying tax.
+            // Note that the principal is not taxed but only the year's accrued interest.
+            // Assumptions : desiredPrincipal is always greater than the initial principal
+            // Assumptions : if the desiredPrincipal is equal to principal  should return 0 Years.
+            int years = 0;
+            while (principal < desiredPrincipal)
+            {            
+                principal = principal * (1 + interest * (1 - tax));
+                years++;
+            }
+            return years;
         }
     }
 }
