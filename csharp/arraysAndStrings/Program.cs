@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
-// namespace csharp
 namespace arraysAndStrings
 {
     class Program
@@ -10,37 +10,49 @@ namespace arraysAndStrings
         {
             Console.WriteLine("Hello World!");
 
-            // SUM SEQUENCE
+            // // SUM SEQUENCE
             // Console.WriteLine(SumSequence(2,2,2));  // 2
             // Console.WriteLine(SumSequence(2,6,2));  // 12
             // Console.WriteLine(SumSequence(1,5,1));  // 15
             // Console.WriteLine(SumSequence(1,5,3));  // 5
             // Console.WriteLine(SumSequence(9,5,3));  // 0
 
-            // RANGES
-            int[] rangesTestCase = {-3, -2, -1, 4, 6, 7, 9, 10, 11, 15};
+            // // RANGES
+            // int[] rangesTestCase = {-3, -2, -1, 4, 6, 7, 9, 10, 11, 15};
             // Console.WriteLine(Ranges(rangesTestCase));  // -3--1,4,6,7,9-11,15
 
-            // XO 
+            // // XO 
             // Console.WriteLine(Xo("xo"));  // True
             // Console.WriteLine(Xo("xxOo"));  // True
             // Console.WriteLine(Xo("xxxm"));  // False
             // Console.WriteLine(Xo("Oo"));  // False
             // Console.WriteLine(Xo("ooom"));  // False
 
-            // PEAKS
-            int[] testCase = {5,2,3,6,4,1,2,3,2,1,4};  // should return { pos: [ 3, 7 ], peaks: [ 6, 3 ] }
-            int[] testCase2 = {1,2,2,1};  // should return { pos: [ 1 ], peaks: [ 2 ] }
-            int[] testCase3 = {1,2,2,3};  // should return empty arrays { pos: [], peaks: [] }
-            int[] testCase4 = {0,1,2,5,1,0};  // should return empty arrays { pos: [ 3 ], peaks: [ 5 ] }
-            int[] testCase5 = {5,2,3,6,4,1,2,3,2,1,4,1,2,2,3};  // should return { pos: [ 3, 7, 10 ], peaks: [ 6, 3, 4 ] }
-            List<int>[] testCaseRet = Peaks(testCase5);
-            Console.Write("pos:   ");
-            testCaseRet[0].ForEach(item => Console.Write("{0}  ", item));
-            Console.WriteLine();
-            Console.Write("peaks: ");
-            testCaseRet[1].ForEach(item => Console.Write("{0}  ", item));
-            Console.WriteLine();
+            // // PEAKS
+            // int[] testCase = {5,2,3,6,4,1,2,3,2,1,4};  // should return { pos: [ 3, 7 ], peaks: [ 6, 3 ] }
+            // int[] testCase2 = {1,2,2,1};  // should return { pos: [ 1 ], peaks: [ 2 ] }
+            // int[] testCase3 = {1,2,2,3};  // should return empty arrays { pos: [], peaks: [] }
+            // int[] testCase4 = {0,1,2,5,1,0};  // should return empty arrays { pos: [ 3 ], peaks: [ 5 ] }
+            // int[] testCase5 = {5,2,3,6,4,1,2,3,2,1,4,1,2,2,3};  // should return { pos: [ 3, 7, 10 ], peaks: [ 6, 3, 4 ] }
+            // List<int>[] testCaseRet = Peaks(testCase5);
+            // Console.Write("pos:   ");
+            // testCaseRet[0].ForEach(item => Console.Write("{0}  ", item));
+            // Console.WriteLine();
+            // Console.Write("peaks: ");
+            // testCaseRet[1].ForEach(item => Console.Write("{0}  ", item));
+            // Console.WriteLine();
+
+            // UNIQUE IN ORDER
+            var testCaseRet0 = UniqueInOrder("");                                    // => ""
+            var testCaseRet = UniqueInOrder("AAAABBBCCDAABBB");                      // => "ABCDAB"
+            var testCaseRet2 = UniqueInOrder("ABBCcAD");                             // => "ABCcAD"
+            var testCaseRet3 = UniqueInOrder("12233");                               // => "123"
+            var testCaseRet4 = UniqueInOrder(new List<double> {1.1, 2.2, 2.2, 3.3}); // => new List<double> {1.1, 2.2, 3.3}
+            testCaseRet0.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
+            testCaseRet.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
+            testCaseRet2.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
+            testCaseRet3.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
+            testCaseRet4.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
         }
 
         static int SumSequence(int being, int end, int step) 
@@ -160,6 +172,34 @@ namespace arraysAndStrings
 
             List<int>[] ret = { pos, peaks };
             return ret;
+        }
+
+        public static IEnumerable<T> UniqueInOrder<T>(IEnumerable<T> iterable)
+        {
+            
+            List<T> a = new List<T>();
+            IComparer<T> elementComparer = Comparer<T>.Default; 
+            using(IEnumerator<T> iter = iterable.GetEnumerator())
+            {
+                if (!iter.MoveNext())  // check for empty input: return empty List 
+                {
+                    return a;
+                }
+                iter.MoveNext();  // move to first element of iterable
+                var temp = iter.Current;  // set temp equal to first element of iterable
+                while (iter.MoveNext()) {  // executes iter.MoveNext(); no need to call within the while loop
+                    var current = iter.Current;
+                    // Console.WriteLine("temp: {0} | current: {1}", temp, current);
+                    int comparison = elementComparer.Compare(temp, current);
+                    if (comparison != 0)  // different
+                    {
+                        a.Add(temp);
+                        temp = iter.Current;
+                    }
+                }
+                a.Add(temp);
+            }
+            return a;
         }
     }
 }
