@@ -31,12 +31,19 @@ namespace csharpSorts
             // }
             // Console.WriteLine();
 
-            // INSERTION SORT
-            int[] insertionSortReturn = InsertionSort(testCase);
-            foreach (var item in insertionSortReturn)
-            {
-                Console.Write("{0}, ", item);
-            }
+            // // INSERTION SORT
+            // int[] insertionSortReturn = InsertionSort(testCase);
+            // foreach (var item in insertionSortReturn)
+            // {
+            //     Console.Write("{0}, ", item);
+            // }
+            // Console.WriteLine();            
+
+            // QUICK SORT
+            testCaseList.ForEach(item => Console.Write("{0}, ", item));
+            Console.WriteLine();
+            List<int> quickSortReturn = QuickSort(testCaseList);
+            quickSortReturn.ForEach(item => Console.Write("{0}, ", item));
             Console.WriteLine();
         }
 
@@ -111,6 +118,36 @@ namespace csharpSorts
                 }
             }
             return arr;
+        }
+
+        static List<int> QuickSort(List<int> arr) 
+        {
+            // divide list using pivot, right and left segments; call recursively on right and left segments
+            int len = arr.Count;
+            if (len <= 1)
+            {
+                return arr;
+            }
+            int pivot;
+            List<int> left = new List<int>();
+            List<int> right = new List<int>();
+            pivot = arr[0];
+            for (int i=1; i<len; i++)
+            {
+                if (arr[i] < pivot) 
+                {
+                    left.Add(arr[i]);
+                }
+                else
+                {
+                    right.Add(arr[i]);
+                }
+            }
+            List<int> combine = new List<int>();
+            combine.AddRange(QuickSort(left));
+            combine.Add(pivot);
+            combine.AddRange(QuickSort(right));
+            return combine;
         }
     }
 }
