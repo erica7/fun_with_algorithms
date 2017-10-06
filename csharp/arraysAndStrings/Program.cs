@@ -42,17 +42,25 @@ namespace arraysAndStrings
             // testCaseRet[1].ForEach(item => Console.Write("{0}  ", item));
             // Console.WriteLine();
 
-            // UNIQUE IN ORDER
-            var testCaseRet0 = UniqueInOrder("");                                    // => ""
-            var testCaseRet = UniqueInOrder("AAAABBBCCDAABBB");                      // => "ABCDAB"
-            var testCaseRet2 = UniqueInOrder("ABBCcAD");                             // => "ABCcAD"
-            var testCaseRet3 = UniqueInOrder("12233");                               // => "123"
-            var testCaseRet4 = UniqueInOrder(new List<double> {1.1, 2.2, 2.2, 3.3}); // => new List<double> {1.1, 2.2, 3.3}
-            testCaseRet0.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
-            testCaseRet.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
-            testCaseRet2.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
-            testCaseRet3.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
-            testCaseRet4.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
+            // // UNIQUE IN ORDER
+            // var testCaseRet0 = UniqueInOrder("");                                    // => ""
+            // var testCaseRet = UniqueInOrder("AAAABBBCCDAABBB");                      // => "ABCDAB"
+            // var testCaseRet2 = UniqueInOrder("ABBCcAD");                             // => "ABCcAD"
+            // var testCaseRet3 = UniqueInOrder("12233");                               // => "123"
+            // var testCaseRet4 = UniqueInOrder(new List<double> {1.1, 2.2, 2.2, 3.3}); // => new List<double> {1.1, 2.2, 3.3}
+            // testCaseRet0.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
+            // testCaseRet.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
+            // testCaseRet2.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
+            // testCaseRet3.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
+            // testCaseRet4.ToList().ForEach(item => Console.Write("{0}  ", item)); Console.WriteLine();
+
+            // ACCUMULATE
+            Console.WriteLine(Accumulate("ZpglnRxqenU"));  // => "Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu"
+            Console.WriteLine(Accumulate("NyffsGeyylB"));  // => "N-Yy-Fff-Ffff-Sssss-Gggggg-Eeeeeee-Yyyyyyyy-Yyyyyyyyy-Llllllllll-Bbbbbbbbbbb");
+            Console.WriteLine(Accumulate("MjtkuBovqrU"));  // => "M-Jj-Ttt-Kkkk-Uuuuu-Bbbbbb-Ooooooo-Vvvvvvvv-Qqqqqqqqq-Rrrrrrrrrr-Uuuuuuuuuuu");
+            Console.WriteLine(Accumulate("EvidjUnokmM"));  // => "E-Vv-Iii-Dddd-Jjjjj-Uuuuuu-Nnnnnnn-Oooooooo-Kkkkkkkkk-Mmmmmmmmmm-Mmmmmmmmmmm");
+            Console.WriteLine(Accumulate("HbideVbxncC"));  // => "H-Bb-Iii-Dddd-Eeeee-Vvvvvv-Bbbbbbb-Xxxxxxxx-Nnnnnnnnn-Cccccccccc-Ccccccccccc");
+
         }
 
         static int SumSequence(int being, int end, int step) 
@@ -198,6 +206,25 @@ namespace arraysAndStrings
                     }
                 }
                 a.Add(temp);
+            }
+            return a;
+        }
+
+        public static String Accumulate(string s) 
+        {
+            int len = s.Length;
+            string a = "";
+            for (int i = 0; i < len; i++)
+            {
+                a += Char.ToUpper(s[i]);
+                for (int n = 0; n < i; n++)
+                {
+                    a += Char.ToLower(s[i]);
+                }
+                if (i < len-1)
+                {
+                    a += "-";
+                }
             }
             return a;
         }
