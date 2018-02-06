@@ -39,9 +39,12 @@ namespace misc
             // Console.WriteLine(SumOfRange(-1, 0)); // == -1 // -1 + 0 = -1
             // Console.WriteLine(SumOfRange(-1, 2)); // == 2  // -1 + 0 + 1 + 2 = 2
 
-            // CALCULATE YEARS 
-            Console.WriteLine(CalculateYears(1000,0.05,0.18,1000));  // => 0
-            Console.WriteLine(CalculateYears(1000,0.01625,0.18,1200));  // => 14
+            // // CALCULATE YEARS 
+            // Console.WriteLine(CalculateYears(1000,0.05,0.18,1000));  // => 0
+            // Console.WriteLine(CalculateYears(1000,0.01625,0.18,1200));  // => 14
+
+            // CIRCLE OF NUMBERS
+            Console.WriteLine(circleOfNumbers(10,2));  // => 7
         }
 
         static int? IsPrime(int n){
@@ -188,6 +191,23 @@ namespace misc
                 years++;
             }
             return years;
+        }
+
+        public static int circleOfNumbers(int n, int firstNumber) {
+          // Consider integer numbers from 0 to n - 1 written down along the circle in such a way that the distance between any two neighbouring numbers is equal (note that 0 and n - 1 are neighbouring, too).
+          // Given n and firstNumber, find the number which is written in the radially opposite position to firstNumber.
+          // Example
+          // For n = 10 and firstNumber = 2, the output should be
+          // circleOfNumbers(n, firstNumber) = 7.
+          int temp = (int) Math.Ceiling((double)n/2);
+          if (firstNumber < temp) 
+          {
+            return temp + firstNumber;
+          }
+          else
+          {
+            return firstNumber - temp;
+          }
         }
     }
 }
