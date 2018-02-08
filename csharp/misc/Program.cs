@@ -43,8 +43,11 @@ namespace misc
             // Console.WriteLine(CalculateYears(1000,0.05,0.18,1000));  // => 0
             // Console.WriteLine(CalculateYears(1000,0.01625,0.18,1200));  // => 14
 
-            // CIRCLE OF NUMBERS
-            Console.WriteLine(circleOfNumbers(10,2));  // => 7
+            // // CIRCLE OF NUMBERS
+            // Console.WriteLine(circleOfNumbers(10,2));  // => 7
+
+            // BOUNCING BALL
+            Console.WriteLine(bouncingBall(10,0.7, 5)); // => 3
         }
 
         static int? IsPrime(int n){
@@ -208,6 +211,33 @@ namespace misc
           {
             return firstNumber - temp;
           }
+        }
+
+        public static int bouncingBall(double h, double bounce, double window){
+          if (h <= 0 || bounce <= 0 || bounce >= 1 || window >= h) 
+          {
+            return -1;
+          }
+          
+          int count = 0;
+          
+          if (h >= window) 
+          {
+            count += 1;
+            h = h * bounce;
+          } 
+          else
+          {
+            return 0;
+          }
+          
+          while (h >= window) 
+          {
+            count += 2;
+            h = h * bounce;
+          }
+          
+          return count;
         }
     }
 }
